@@ -1,0 +1,272 @@
+/*
+filename: style.css
+author: David O'Connell
+created: 
+last modified: 14th April 2025
+description: CSS styling for index.html, apply.html, about.html, & jobs.html
+*/
+
+/* Colours used (in rgba)
+
+/* *Universal element Stying */
+* {
+    padding: 0.1em;
+    margin: 0.1em;
+}
+
+/* Element Styling */
+body {
+    font-family: 'Times New Roman', Times, serif;
+    font-style: normal;
+    color: black;
+    background-image: url("images/index-background.jpg"); /* Image courtesy of 'Burak The Weekender' on pexels! */
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+aside {
+    width: 25%;
+    float: right;
+    margin: 1% 1% 1% 1%;
+    background: linear-gradient(to top,rgba(167, 209, 167) , rgb(153, 230, 153));
+    border-radius: 20px;
+    box-shadow: 0px 2px 4px gray;
+    border: 4px solid rgba(67,67,67);
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+footer {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    align-items: flex-end;
+    clear: right;
+}
+footer a {
+    text-decoration: none;
+    border: 6px solid rgba(67,67,67);
+    background-color: rgba(67,67,67);
+    border-radius: 8px;
+    color: ghostwhite;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    display: flex;
+}
+
+h1 {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    border: 6px solid rgba(67,67,67);
+    background-color: rgba(67,67,67);
+    border-radius: 8px;
+    color: ghostwhite;
+    display: flex;
+    justify-content: left;
+    align-items: flex-start;
+}
+
+section {
+    margin: 1% 1% 1% 1%;
+    background: linear-gradient(to top,rgba(167, 209, 167) , rgb(153, 230, 153));
+    border-radius: 20px;
+    box-shadow: 0px 2px 4px gray;
+    border: 4px solid rgba(67,67,67);
+    padding-left: 3px;
+}
+section li {
+    padding-left: 3px;
+    list-style-type: none;
+}
+
+fieldset legend {
+    margin: 0.2% 0.2% 0.2% 0.2%;
+    text-decoration: none;
+    border: 6px solid rgba(67,67,67);
+    background-color: rgba(67,67,67);
+    border-radius: 8px;
+    color: ghostwhite;
+    float: left;
+}
+
+/* #id Styling */
+#sections {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border-radius: 8px;
+    margin: 1% 1% 1% 1%;
+}
+
+/*About Page Sections*/
+#sections li {
+    list-style-type: none;
+}
+#information {
+    display: flex;
+    flex-direction: column;
+    order: -3
+}
+#tutor {
+    display: flex;
+    flex-direction: column;
+    order: -2
+}
+#contributions {
+    display: flex;
+    flex-direction: column;
+    order: -1
+}
+
+#photo {
+    display: flex;
+    flex-direction: column;
+    order: 3
+}
+#photo img {
+    border-radius: 8px;
+    max-width: 100%;
+    height: auto;
+    width: auto;
+    float: right;
+}
+
+#studentid {
+    display: flex;
+    flex-direction: column;
+    order: 0
+}
+#interests {
+    display: flex;
+    flex-direction: column;
+    order: 1
+}
+#demographic {
+    display: flex;
+    flex-direction: column;
+    order: 2
+}
+
+
+/* .class Styling */
+.menu h1 {
+    font-family: 'Lucida Sans', Lucida, monospace;
+}
+.menu {
+    background-color: ghostwhite;
+    font-family: 'Lucida Sans', Lucida, monospace;
+    border: 2px solid rgba(67,67,67);
+}
+.menu ul{
+    color:rgba(67,67,67);
+    font-weight: bold;
+    opacity: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: normal;
+    flex-direction: row;
+}
+.menu ul li {
+    text-decoration: none;
+    list-style-type: none;
+    opacity: 100%;
+    font-family: 'Courier New', Courier, monospace;
+}
+.menu ul li a {
+    text-decoration: none;
+    border: 6px solid rgba(67,67,67);
+    background-color: rgba(67,67,67);
+    border-radius: 8px;
+    color: ghostwhite;
+}
+
+.homepage_description {
+    margin: 1% 1% 1% 1%;
+    background: linear-gradient(to top,rgba(167, 209, 167) , rgb(153, 230, 153));
+    border-radius: 20px;
+    box-shadow: 0px 2px 4px gray;
+    border: 4px solid rgba(67,67,67);
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.homepage_description h2 {
+    margin: 0.2% 0.2% 0.2% 0.2%;
+    text-decoration: none;
+    border: 6px solid rgba(67,67,67);
+    background-color: rgba(67,67,67);
+    border-radius: 8px;
+    color: ghostwhite;
+    float: left;
+    text-align: center;
+    order: 0;
+}
+.homepage_description p {
+    font-size: 1.25em;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    align-self: baseline;
+}
+
+/* Grouping Styling - Any styling applied to more than one element */
+
+p input, select {
+    box-shadow: 0px 2px 4px gray;
+    border: 2px solid rgba(67,67,67);
+    border-radius: 6px;
+}
+
+nav, footer {
+    background-color: ghostwhite;
+    background: linear-gradient(to top,rgba(167, 209, 167) , rgb(153, 230, 153));
+    box-shadow: 0px 2px 4px gray;
+    border-radius: 8px;
+    opacity: 100%;
+}
+
+fieldset, #submit {
+    margin: 1% 1% 1% 1%;
+    background: linear-gradient(to top,rgba(167, 209, 167) , rgb(153, 230, 153));
+    border-radius: 20px;
+    box-shadow: 0px 2px 4px gray;
+    border: 4px solid rgba(67,67,67);
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    font-weight: 400;
+}
+
+th, table caption {
+    margin: 0.1% 0.1% 0.1% 0.1%;
+    border: 2px solid rgba(67,67,67);
+    background-color: rgba(67,67,67);
+    border-radius: 2px;
+    color: ghostwhite;
+    box-shadow: 0px 2px 4px gray;
+}
+
+td, dl dt {
+    background: linear-gradient(to top,rgba(34,139,34,0.4) , rgb(50,205,50,0.4));
+    border-radius: 4px;
+    box-shadow: 0px 2px 4px gray;
+    color: ghostwhite;
+}
+
+/* Psuedo Classes */
+.menu ul li a:hover {
+    color: black;
+    border: 6px solid ghostwhite;
+    background-color: ghostwhite;
+}
+td:hover {
+    color: black;
+    background: ghostwhite;
+    background-color: ghostwhite;
+}
+
+p::first-letter {
+    font-size: 110%;
+}
