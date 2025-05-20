@@ -15,12 +15,21 @@ if ($conn) {
     $phone = $_POST['phone'];
     $jobnumber = $_POST['jobnumber'];
     $experience = $_POST['experience'];
-    $otherskills = $_POST['skills']
+    $otherskills = $_POST['skills'];
+
+    
+
+
+
+
 
 
     //echo '<pre>'; print_r($experience); echo '</pre>';
+    echo "$otherskills <br>";
+
     print_r($experience);
     //echo "$experience[0]";
+
 
     //$result = mysqli_query();
 } else {
