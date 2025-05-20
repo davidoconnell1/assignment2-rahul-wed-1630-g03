@@ -14,9 +14,12 @@ if ($conn) {
     $email = $_POST['email'];
     $phone = $_POST['phone'];
     $jobnumber = $_POST['jobnumber'];
-    $experience = $_POST['pythonexperience'];
+    $python_experience = $_POST['python_experience'];
+    //$sql_experience = $_POST['sql_experience'];
 
-    echo "$jobnumber";
+
+
+    echo "$python_experience";
 
     //$result = mysqli_query();
 } else {

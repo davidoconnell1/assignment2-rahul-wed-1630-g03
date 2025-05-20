@@ -103,7 +103,7 @@
         <!--Programming languages checkboxes-->
         <p>Technical experience</p>
         <p><label for="python">Python</label>
-          <input type="checkbox" id="python" name="pythonexperience" value="1" checked="checked">
+          <input type="checkbox" id="python" name="experience[]" value="python" checked="checked">
         <label for="sql">SQL</label>
           <input type="checkbox" id="sql" name="experience[]" value="sql">
         <label for="c">C/C++</label>
