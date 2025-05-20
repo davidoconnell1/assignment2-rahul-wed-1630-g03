@@ -24,7 +24,7 @@
       </nav>
 
     <!--Form-->
-    <form method="post" action="process_eoi.php">
+    <form method="post" action="process_eoi.php" novalidate>
       <!--Personal information box-->
       <fieldset class="personalinformation">
         <legend>Personal information</legend>
@@ -95,15 +95,15 @@
         <p><label for="jobnumber">Job reference number</label> <!--JOB REFERENCE NUMBERS WILL BE 5 ALPHANUMERIC CHARACTERS-->
           <select name="jobnumber" id="jobnumber" required>
             <option value="">Select</option>
-            <option value="dataanalyst">100</option>
-            <option value="servertechnician">101</option>
+            <option value="100">100</option>
+            <option value="101">101</option>
           </select>
         </p>
 
         <!--Programming languages checkboxes-->
         <p>Technical experience</p>
         <p><label for="python">Python</label>
-          <input type="checkbox" id="python" name="experience[]" value="python" checked="checked">
+          <input type="checkbox" id="python" name="pythonexperience" value="1" checked="checked">
         <label for="sql">SQL</label>
           <input type="checkbox" id="sql" name="experience[]" value="sql">
         <label for="c">C/C++</label>
