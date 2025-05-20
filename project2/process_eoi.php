@@ -3,8 +3,9 @@ session_start();
 require_once('settings.php');
 $conn = mysqli_connect("localhost", "root", "", "project2db");
 if ($conn) {
-    $firstname = $_POST['firstname'];
-    $lastname = $_POST['lastname'];
+    //Get form data
+    $first_name = $_POST['firstname'];
+    $last_name = $_POST['lastname'];
     $dob = $_POST['dob'];
     $gender = $_POST['gender'];
     $address = $_POST['address'];
@@ -13,11 +14,12 @@ if ($conn) {
     $postcode = $_POST['postcode'];
     $email = $_POST['email'];
     $phone = $_POST['phone'];
-    $jobnumber = $_POST['jobnumber'];
+    $job_number = $_POST['jobnumber'];
     $experience = $_POST['experience'];
-    $otherskills = $_POST['skills'];
+    $other_skills = $_POST['skills'];
 
-    $sql = "
+    //Create empty eoi table
+    $create_eoi_table = "
     CREATE TABLE `eoi` (
     `EOInumber` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `Job Reference Number` int(11) NOT NULL,
@@ -36,12 +38,16 @@ if ($conn) {
     `Other skills` text NOT NULL,
     `Status` set('New','Current','Final') NOT NULL DEFAULT 'New'
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-    "
+    ";
 
+    //Insert record into eoi table
+    $insert_into_eoi = "
+    INSERT INTO `eoi` (`EOInumber`, `Job Reference Number`, `First Name`, `Last Name`, `Street Address`, `Suburb/town`, `State`, `Postcode`, `Email Address`, `Phone number`, `Python experience`, `SQL experience`, `C/C++ experience`, `PowerShell experience`, `Other skills`, `Status`) 
+    VALUES (NULL, $job_number, $first_name, $last_name, $address, $suburb, $state, $postcode, $email, $phone, '1', '0', '0', '0', $other_skills, 'New');
+    ";
+    //check experience booleans and status
 
-
-
-    mysqli_query();
+    //mysqli_query();
 
 
 
