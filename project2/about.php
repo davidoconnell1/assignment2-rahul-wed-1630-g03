@@ -11,20 +11,12 @@
 </head>
 
 <body>
-  <header> <!-- Logo / Company Name-->
-    <img id="logo" src="images/image.png" alt="Intelligenz logo">
-    <h1>Intelligenz Analytics - About</h1>
-  </header>
-  <nav class="menu"> <!-- Menu / Navigation-->
-    <ul>
-      <li> <a href="index.html">Home</a></li>
-      <li> <a href="jobs.html">Jobs</a></li>
-      <li> <a href="apply.php">Apply</a></li>
-      <li> <a href="about.html">About</a></li>
-      <li> <a href="manage.php">Manage</a></li>
-      <li> <a href="mailto:intelligenzanalytics@gmail.com">Email</a></li>
-    </ul>
-    </nav>
+  <header> 
+    <!-- Logo / Company Name-->
+    <?php 
+      include 'header.inc'; ?>
+    <!-- Menu / Navigation-->
+    <?php include 'nav.inc'; ?>
 <br>
   
   <!--In-page nav menu-->
@@ -209,5 +201,6 @@
       </table>
     </section>
   </div>
+  <?php include 'footer.inc'; ?>
 </body>
 </html>

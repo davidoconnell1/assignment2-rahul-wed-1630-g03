@@ -8,22 +8,10 @@
   </head>
   <body>
     <!-- Header with Company Logo and Name -->
-    <header> 
-      <img id="logo" src="images/image.png" alt="Intelligenz logo">
-      <h1>Intelligenz Analytics - Available Jobs</h1>
-    </header>
+    <?php include 'header.inc'; ?>
 
     <!-- Menu / Navigation -->
-    <nav class="menu">
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="jobs.html">Jobs</a></li>
-        <li><a href="apply.php">Apply</a></li>
-        <li><a href="about.html">About</a></li>
-        <li> <a href="manage.php">Manage</a></li>
-        <li><a href="mailto:intelligenzanalytics@gmail.com">Email</a></li>
-      </ul>
-    </nav>
+    <?php include 'nav.inc'; ?>
 
     <!-- Main Content Section -->
     <main>
