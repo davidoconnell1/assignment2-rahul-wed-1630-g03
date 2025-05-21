@@ -16,7 +16,7 @@ description: CSS styling for index.html, apply.html, about.html, & jobs.html
 
 /* Element Styling */
 body {
-    font-family: 'Times New Roman', Times, serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-style: normal;
     color: black;
     background-image: url("images/index-background.jpg"); /* Image courtesy of 'Burak The Weekender' on pexels! */
@@ -59,6 +59,7 @@ footer a {
 h1 {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     border: 6px solid rgba(67,67,67);
+
     background-color: rgba(67,67,67);
     border-radius: 8px;
     color: ghostwhite;
