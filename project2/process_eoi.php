@@ -18,6 +18,9 @@ if ($conn) {
     $experience = $_POST['experience'];
     $other_skills = $_POST['skills'];
 
+    $experience_length = count($experience);
+    echo "$experience_length";
+
     //Create empty eoi table
     $create_eoi_table = "
     CREATE TABLE `eoi` (
