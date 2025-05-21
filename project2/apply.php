@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apply</title>
+    <title>Intelligenz Analytics – Job Application</title>
     <link rel="stylesheet" href="styles/style.css">
   </head>
   <body>
@@ -11,7 +11,11 @@
 
     <!-- Menu / Navigation-->
     <?php include 'nav.inc'; ?>
-
+    <main>
+  <h1>Apply for a Job</h1>
+  <p><label for="ref">Job Reference Number</label>
+  <input type="text" id="ref" name="ref" minlength="5" maxlength="5" pattern="[A-Za-z0-9]{5}" required placeholder="Enter 5-character ref no">
+</p>
     <!--Form-->
     <form method="post" action="process_eoi.php" novalidate>
       <!--Personal information box-->
