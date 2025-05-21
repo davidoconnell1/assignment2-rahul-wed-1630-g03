@@ -201,6 +201,8 @@
       </table>
     </section>
   </div>
+  
+  <!---Footer--->
   <?php include 'footer.inc'; ?>
 </body>
 </html>

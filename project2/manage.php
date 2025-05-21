@@ -11,5 +11,8 @@
       include 'header.inc';
       include 'nav.inc';
     ?>
+
+    <!---Footer--->
+    <?php include 'footer.inc'; ?>
   </body>
 </html>

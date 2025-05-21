@@ -110,6 +110,7 @@
       <!--Form submit button-->
       <p id="submit"><input type="submit" value="Apply"></p>
     </form>
+    <!---Footer--->
     <?php include 'footer.inc'; ?>
   </body>
 </html>
