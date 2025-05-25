@@ -34,7 +34,7 @@ if ($conn) {
     $phone = preg_replace("/[^0-9]/", "", $phone);
 
     #Check no required fields are empty
-    if ($first_name == "" OR $last_name == "" OR $dob == "" OR $address == "" OR $suburb == "" OR $postcode == "" OR $email == "" OR $phone == "" OR $state == "" OR $job_number == "") {
+    if ($first_name == "" || $last_name == "" || $dob == "" || $address == "" || $suburb == "" || $postcode == "" || $email == "" || $phone == "" || $state == "" || $job_number == "") {
         $message = "Some required fields are missing";
     }
 
@@ -45,64 +45,64 @@ if ($conn) {
     if (strlen($suburb) > 40) {$message = "Suburb should be max of 40 characters.";}
 
     #Validate phone number
-    if (strlen($phone) > 10 OR strlen($phone) < 8) {$message = "Phone number is invalid.";}
+    if (strlen($phone) > 10 || strlen($phone) < 8) {$message = "Phone number is invalid.";}
     
     #Validate postcode
     $postcode = (int)$postcode;
     if ($state == "vic") {
-        if ($postcode < 3000 OR $postcode > 8999) {
+        if ($postcode < 3000 || $postcode > 8999) {
             $message = "Postcode does not match state";
         } else {
-            if ($postcode > 3996 AND $postcode < 8000) {
+            if ($postcode > 3996 && $postcode < 8000) {
                 $message = "Postcode does not match state";
             }
         }
     } elseif ($state == "nsw") {
-        if ($postcode < 1000 OR $postcode > 2999) {
+        if ($postcode < 1000 || $postcode > 2999) {
             $message = "Postcode does not match state";
         } else {
-            if ($postcode > 2599 AND $postcode < 2619) {
+            if ($postcode > 2599 && $postcode < 2619) {
                 $message = "Postcode does not match state";
             } else {
-                if ($postcode > 2899 AND $postcode < 2921) {
+                if ($postcode > 2899 && $postcode < 2921) {
                     $message = "Postcode does not match state";
                 }
             }
         }
     } elseif ($state == "qld") {
-        if ($postcode < 4000 OR $postcode > 9999) {
+        if ($postcode < 4000 || $postcode > 9999) {
             $message = "Postcode does not match state";
         } else {
-            if ($postcode > 3996 AND $postcode < 9000) {
+            if ($postcode > 3996 && $postcode < 9000) {
                 $message = "Postcode does not match state";
             }
         }
     } elseif ($state == "nt") {
-        if ($postcode < 800 OR $postcode > 999) {
+        if ($postcode < 800 || $postcode > 999) {
             $message = "Postcode does not match state";
         }
     } elseif ($state == "wa") {
-        if ($postcode < 6000 OR $postcode > 6999) {
+        if ($postcode < 6000 || $postcode > 6999) {
             $message = "Postcode does not match state";
         } else {
-            if ($postcode > 6797 AND $postcode < 6800) {
+            if ($postcode > 6797 && $postcode < 6800) {
                 $message = "Postcode does not match state";
             }
         }
     } elseif ($state == "sa") {
-        if ($postcode < 5000 OR $postcode > 5999) {
+        if ($postcode < 5000 || $postcode > 5999) {
             $message = "Postcode does not match state";
         }
     } elseif ($state == "tas") {
-        if ($postcode < 7000 OR $postcode > 7999) {
+        if ($postcode < 7000 || $postcode > 7999) {
             $message = "Postcode does not match state";
         }
     } elseif ($state == "act") {
-        if ($postcode < 200 OR $postcode > 2920) {
+        if ($postcode < 200 || $postcode > 2920) {
             $message = "Postcode does not match state";
-        } elseif ($postcode > 299 AND $postcode < 2600) {
+        } elseif ($postcode > 299 && $postcode < 2600) {
             $message = "Postcode does not match state";
-        } elseif ($postcode > 2618 AND $postcode < 2900) {
+        } elseif ($postcode > 2618 && $postcode < 2900) {
             $message = "Postcode does not match state";
         }
     }
@@ -160,16 +160,28 @@ if ($conn) {
         INSERT INTO eoi (`Job Reference Number`, `First Name`, `Last Name`, `Street Address`, `Suburb/town`, `State`, `Postcode`, `Email Address`, `Phone number`, `Python experience`, `SQL experience`, `C/C++ experience`, `PowerShell experience`, `Other skills`) 
         VALUES ('$job_number', '$first_name', '$last_name', '$address', '$suburb', '$state', $postcode, '$email', $phone, $python, $sql, $c, $powershell, '$other_skills');
     ";
-    
+
     if ($message == "") {
         $result = mysqli_query($conn, $insert_into_eoi);
         if ($result) {
-            echo "success";
-        } else {
-            echo "failed";
+            $complete_heading = "Application received";
+            $complete_text = "Your application has been received with EOI number: " . mysqli_insert_id($conn);
+            $_SESSION['complete_heading'] = $complete_heading;
+            $_SESSION['complete_text'] = $complete_text;
+            header("Location: completedform.php");
+        } else { 
+            $complete_heading = "Internal server error";
+            $complete_text = "Unable to submit application due to an internal server error.";
+            $_SESSION['complete_heading'] = $complete_heading;
+            $_SESSION['complete_text'] = $complete_text;
+            header("Location: completedform.php");
         }
     } else {
-        echo "$message";
+            $complete_heading = "Application error";
+            $complete_text = "Application submission raised the following error: " . $message;
+            $_SESSION['complete_heading'] = $complete_heading;
+            $_SESSION['complete_text'] = $complete_text;
+            header("Location: completedform.php");
     }
 
 } else {
