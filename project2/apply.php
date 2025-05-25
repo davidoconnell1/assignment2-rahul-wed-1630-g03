@@ -88,8 +88,8 @@
         <p><label for="jobnumber">Job reference number</label> <!--JOB REFERENCE NUMBERS WILL BE 5 ALPHANUMERIC CHARACTERS-->
           <select name="jobnumber" id="jobnumber" required>
             <option value="">Select</option>
-            <option value="100">100</option>
-            <option value="101">101</option>
+            <option value="10000">10000</option>
+            <option value="10001">10001</option>
           </select>
         </p>
 

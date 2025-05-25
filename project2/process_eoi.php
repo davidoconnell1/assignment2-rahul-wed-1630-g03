@@ -66,7 +66,7 @@ if ($conn) {
     $create_eoi_table = "
     CREATE TABLE IF NOT EXISTS `eoi` (
     `EOInumber` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `Job Reference Number` set('Select','100','101') NOT NULL DEFAULT 'Select',
+    `Job Reference Number` set('Select','10000','10001') NOT NULL DEFAULT 'Select',
     `First Name` varchar(20) NOT NULL,
     `Last Name` varchar(20) NOT NULL,
     `Street Address` varchar(40) NOT NULL,
