@@ -28,14 +28,83 @@ if ($conn) {
     $last_name = preg_replace("~[<>/\\\ ]~", "", $last_name);
     $dob = preg_replace("~[<>\\\ ]~", "", $dob);
     $address = preg_replace("~[<>/\\\]~", "", $address);
-    $suburb = preg_replace("~[<>/\\\ ]~", "", $suburb);
-    $postcode = preg_replace("~[<>/\\\ ]~", "", $postcode);
+    $suburb = preg_replace("~[<>/\\\]~", "", $suburb);
+    $postcode = preg_replace("/[^0-9]/", "", $postcode);
     $email = filter_var($email, FILTER_SANITIZE_EMAIL);
     $phone = preg_replace("/[^0-9]/", "", $phone);
 
     #Check no required fields are empty
     if ($first_name == "" OR $last_name == "" OR $dob == "" OR $address == "" OR $suburb == "" OR $postcode == "" OR $email == "" OR $phone == "" OR $state == "" OR $job_number == "") {
         $message = "Some required fields are missing";
+    }
+
+    #Validate length of text fields
+    if (strlen($first_name) > 20) {$message = "First name should be max of 20 characters.";}
+    if (strlen($last_name) > 20) {$message = "Last name should be max of 20 characters.";}
+    if (strlen($address) > 40) {$message = "Street address should be max of 40 characters.";}
+    if (strlen($suburb) > 40) {$message = "Suburb should be max of 40 characters.";}
+
+    #Validate phone number
+    if (strlen($phone) > 10 OR strlen($phone) < 8) {$message = "Phone number is invalid.";}
+    
+    #Validate postcode
+    $postcode = (int)$postcode;
+    if ($state == "vic") {
+        if ($postcode < 3000 OR $postcode > 8999) {
+            $message = "Postcode does not match state";
+        } else {
+            if ($postcode > 3996 AND $postcode < 8000) {
+                $message = "Postcode does not match state";
+            }
+        }
+    } elseif ($state == "nsw") {
+        if ($postcode < 1000 OR $postcode > 2999) {
+            $message = "Postcode does not match state";
+        } else {
+            if ($postcode > 2599 AND $postcode < 2619) {
+                $message = "Postcode does not match state";
+            } else {
+                if ($postcode > 2899 AND $postcode < 2921) {
+                    $message = "Postcode does not match state";
+                }
+            }
+        }
+    } elseif ($state == "qld") {
+        if ($postcode < 4000 OR $postcode > 9999) {
+            $message = "Postcode does not match state";
+        } else {
+            if ($postcode > 3996 AND $postcode < 9000) {
+                $message = "Postcode does not match state";
+            }
+        }
+    } elseif ($state == "nt") {
+        if ($postcode < 800 OR $postcode > 999) {
+            $message = "Postcode does not match state";
+        }
+    } elseif ($state == "wa") {
+        if ($postcode < 6000 OR $postcode > 6999) {
+            $message = "Postcode does not match state";
+        } else {
+            if ($postcode > 6797 AND $postcode < 6800) {
+                $message = "Postcode does not match state";
+            }
+        }
+    } elseif ($state == "sa") {
+        if ($postcode < 5000 OR $postcode > 5999) {
+            $message = "Postcode does not match state";
+        }
+    } elseif ($state == "tas") {
+        if ($postcode < 7000 OR $postcode > 7999) {
+            $message = "Postcode does not match state";
+        }
+    } elseif ($state == "act") {
+        if ($postcode < 200 OR $postcode > 2920) {
+            $message = "Postcode does not match state";
+        } elseif ($postcode > 299 AND $postcode < 2600) {
+            $message = "Postcode does not match state";
+        } elseif ($postcode > 2618 AND $postcode < 2900) {
+            $message = "Postcode does not match state";
+        }
     }
 
     #Assign programming experience variables from checkbox input     
@@ -85,13 +154,11 @@ if ($conn) {
     ";
 
     mysqli_query($conn, $create_eoi_table);
-    
-    echo "$suburb";
 
     //Insert record into eoi table
     $insert_into_eoi = "
         INSERT INTO eoi (`Job Reference Number`, `First Name`, `Last Name`, `Street Address`, `Suburb/town`, `State`, `Postcode`, `Email Address`, `Phone number`, `Python experience`, `SQL experience`, `C/C++ experience`, `PowerShell experience`, `Other skills`) 
-        VALUES ($job_number, '$first_name', '$last_name', '$address', '$suburb', '$state', $postcode, '$email', $phone, $python, $sql, $c, $powershell, '$other_skills');
+        VALUES ('$job_number', '$first_name', '$last_name', '$address', '$suburb', '$state', $postcode, '$email', $phone, $python, $sql, $c, $powershell, '$other_skills');
     ";
     
     if ($message == "") {
