@@ -5,7 +5,7 @@ require_once('settings.php');
 $conn = mysqli_connect("localhost", "root", "", "project2db");
 
 if ($conn) {
-    //Get form data
+    #Get form data
     $first_name = $_POST['firstname'];
     $last_name = $_POST['lastname'];
     $dob = $_POST['dob'];
@@ -20,12 +20,30 @@ if ($conn) {
     $experience = $_POST['experience'];
     $other_skills = $_POST['skills'];
 
-    $experience_length = count($experience);
-    echo "<p>$experience_length</p>";
-    echo "$experience[0]";
+    #Assign programming experience variables from checkbox input     
+    if (in_array("python", $experience)) {
+        $python = 1;
+    } else {
+        $python = 0;
+    }
+    if (in_array("sql", $experience)) {
+        $sql = 1;
+    } else {
+        $sql = 0;
+    }
+    if (in_array("c", $experience)) {
+        $c = 1;
+    } else {
+        $c = 0;
+    }
+    if (in_array("powershell", $experience)) {
+        $powershell = 1;
+    } else {
+        $powershell = 0;
+    }
 
 
-    //Create empty eoi table if it doesn't exist
+    #SQL to create empty eoi table if it doesn't exist
     $create_eoi_table = "
     CREATE TABLE IF NOT EXISTS `eoi` (
     `EOInumber` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -53,7 +71,7 @@ if ($conn) {
     //Insert record into eoi table
     $insert_into_eoi = "
     INSERT INTO `eoi` (`EOInumber`, `Job Reference Number`, `First Name`, `Last Name`, `Street Address`, `Suburb/town`, `State`, `Postcode`, `Email Address`, `Phone number`, `Python experience`, `SQL experience`, `C/C++ experience`, `PowerShell experience`, `Other skills`, `Status`) 
-    VALUES (NULL, $job_number, $first_name, $last_name, $address, $suburb, $state, $postcode, $email, $phone, '1', '0', '0', '0', $other_skills, 'New');
+    VALUES (NULL, $job_number, $first_name, $last_name, $address, $suburb, $state, $postcode, $email, $phone, $python, $sql, $c, $powershell, $other_skills, 'New');
     ";
     //check experience booleans and status
 

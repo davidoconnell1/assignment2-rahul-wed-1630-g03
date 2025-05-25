@@ -96,13 +96,13 @@
         <!--Programming languages checkboxes-->
         <p>Technical experience</p>
         <p><label for="python">Python</label>
-          <input type="checkbox" id="python" name="python" value="1" checked="checked">
+          <input type="checkbox" id="python" name="experience[]" value="python" checked="checked">
         <label for="sql">SQL</label>
-          <input type="checkbox" id="sql" name="sql" value="1">
+          <input type="checkbox" id="sql" name="experience[]" value="sql">
         <label for="c">C/C++</label>
-          <input type="checkbox" id="c" name="c" value="1">
+          <input type="checkbox" id="c" name="experience[]" value="c">
         <label for="powershell">PowerShell</label>
-          <input type="checkbox" id="powershell" name="powershell" value="1">
+          <input type="checkbox" id="powershell" name="experience[]" value="powershell">
         </p>
 
         <!--Optional textarea for any other skills-->
