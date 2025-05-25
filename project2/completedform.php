@@ -25,6 +25,9 @@ $complete_text = $_SESSION["complete_text"];
       <div class="homepage_description">
         <h2><?php echo "$complete_heading"; ?></h2>
         <p><?php echo "$complete_text"; ?></p>
+        <?php if ($complete_heading !== "Application received") {
+            echo "<p><a href='apply.php'>  Go back</a></p>";
+        } ?>
       </div>
 
       <!---Footer--->

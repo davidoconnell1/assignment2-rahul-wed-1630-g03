@@ -2,6 +2,7 @@
 session_start();
 require_once('settings.php');
 
+#Connect to database
 $conn = mysqli_connect("localhost", "root", "", "project2db");
 
 if ($conn) {
@@ -35,7 +36,7 @@ if ($conn) {
 
     #Check no required fields are empty
     if ($first_name == "" || $last_name == "" || $dob == "" || $address == "" || $suburb == "" || $postcode == "" || $email == "" || $phone == "" || $state == "" || $job_number == "") {
-        $message = "Some required fields are missing";
+        $message = "Some required fields are missing.";
     }
 
     #Validate length of text fields
@@ -51,59 +52,59 @@ if ($conn) {
     $postcode = (int)$postcode;
     if ($state == "vic") {
         if ($postcode < 3000 || $postcode > 8999) {
-            $message = "Postcode does not match state";
+            $message = "Postcode does not match state.";
         } else {
             if ($postcode > 3996 && $postcode < 8000) {
-                $message = "Postcode does not match state";
+                $message = "Postcode does not match state.";
             }
         }
     } elseif ($state == "nsw") {
         if ($postcode < 1000 || $postcode > 2999) {
-            $message = "Postcode does not match state";
+            $message = "Postcode does not match state.";
         } else {
             if ($postcode > 2599 && $postcode < 2619) {
-                $message = "Postcode does not match state";
+                $message = "Postcode does not match state.";
             } else {
                 if ($postcode > 2899 && $postcode < 2921) {
-                    $message = "Postcode does not match state";
+                    $message = "Postcode does not match state.";
                 }
             }
         }
     } elseif ($state == "qld") {
         if ($postcode < 4000 || $postcode > 9999) {
-            $message = "Postcode does not match state";
+            $message = "Postcode does not match state.";
         } else {
             if ($postcode > 3996 && $postcode < 9000) {
-                $message = "Postcode does not match state";
+                $message = "Postcode does not match state.";
             }
         }
     } elseif ($state == "nt") {
         if ($postcode < 800 || $postcode > 999) {
-            $message = "Postcode does not match state";
+            $message = "Postcode does not match state.";
         }
     } elseif ($state == "wa") {
         if ($postcode < 6000 || $postcode > 6999) {
-            $message = "Postcode does not match state";
+            $message = "Postcode does not match state.";
         } else {
             if ($postcode > 6797 && $postcode < 6800) {
-                $message = "Postcode does not match state";
+                $message = "Postcode does not match state.";
             }
         }
     } elseif ($state == "sa") {
         if ($postcode < 5000 || $postcode > 5999) {
-            $message = "Postcode does not match state";
+            $message = "Postcode does not match state.";
         }
     } elseif ($state == "tas") {
         if ($postcode < 7000 || $postcode > 7999) {
-            $message = "Postcode does not match state";
+            $message = "Postcode does not match state.";
         }
     } elseif ($state == "act") {
         if ($postcode < 200 || $postcode > 2920) {
-            $message = "Postcode does not match state";
+            $message = "Postcode does not match state.";
         } elseif ($postcode > 299 && $postcode < 2600) {
-            $message = "Postcode does not match state";
+            $message = "Postcode does not match state.";
         } elseif ($postcode > 2618 && $postcode < 2900) {
-            $message = "Postcode does not match state";
+            $message = "Postcode does not match state.";
         }
     }
 
@@ -129,8 +130,6 @@ if ($conn) {
         $powershell = 0;
     }
 
-
-
     #SQL to create empty eoi table if it doesn't exist
     $create_eoi_table = "
     CREATE TABLE IF NOT EXISTS `eoi` (
@@ -153,6 +152,7 @@ if ($conn) {
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
     ";
 
+    #Query to create table if it doesn't exist
     mysqli_query($conn, $create_eoi_table);
 
     //Insert record into eoi table
@@ -161,29 +161,33 @@ if ($conn) {
         VALUES ('$job_number', '$first_name', '$last_name', '$address', '$suburb', '$state', $postcode, '$email', $phone, $python, $sql, $c, $powershell, '$other_skills');
     ";
 
+    #Test to see if an error message has been generated
     if ($message == "") {
+
+        #Attempt to add application to eoi table
         $result = mysqli_query($conn, $insert_into_eoi);
+
+        #Assign header and body text based on success or failure
         if ($result) {
             $complete_heading = "Application received";
             $complete_text = "Your application has been received with EOI number: " . mysqli_insert_id($conn);
-            $_SESSION['complete_heading'] = $complete_heading;
-            $_SESSION['complete_text'] = $complete_text;
-            header("Location: completedform.php");
         } else { 
             $complete_heading = "Internal server error";
             $complete_text = "Unable to submit application due to an internal server error.";
-            $_SESSION['complete_heading'] = $complete_heading;
-            $_SESSION['complete_text'] = $complete_text;
-            header("Location: completedform.php");
         }
+
     } else {
-            $complete_heading = "Application error";
-            $complete_text = "Application submission raised the following error: " . $message;
-            $_SESSION['complete_heading'] = $complete_heading;
-            $_SESSION['complete_text'] = $complete_text;
-            header("Location: completedform.php");
+        #Assign error header and add error message to error body text
+        $complete_heading = "Application error";
+        $complete_text = "Application submission raised the following error: " . $message;
     }
 
+    #Redirect the user to the completed form page with their generated EOI number or error message.
+    $_SESSION['complete_heading'] = $complete_heading;
+    $_SESSION['complete_text'] = $complete_text;
+    header("Location: completedform.php");
+
 } else {
+    #Terminate the script if connection to database fails
     die("Connection falied: " . mysqli_connect_error());
 }
