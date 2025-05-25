@@ -1,7 +1,9 @@
 <?php
 session_start();
 require_once('settings.php');
+
 $conn = mysqli_connect("localhost", "root", "", "project2db");
+
 if ($conn) {
     //Get form data
     $first_name = $_POST['firstname'];
@@ -19,11 +21,13 @@ if ($conn) {
     $other_skills = $_POST['skills'];
 
     $experience_length = count($experience);
-    echo "$experience_length";
+    echo "<p>$experience_length</p>";
+    echo "$experience[0]";
 
-    //Create empty eoi table
+
+    //Create empty eoi table if it doesn't exist
     $create_eoi_table = "
-    CREATE TABLE `eoi` (
+    CREATE TABLE IF NOT EXISTS `eoi` (
     `EOInumber` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `Job Reference Number` int(11) NOT NULL,
     `First Name` varchar(50) NOT NULL,
@@ -42,6 +46,9 @@ if ($conn) {
     `Status` set('New','Current','Final') NOT NULL DEFAULT 'New'
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
     ";
+
+    mysqli_query($conn, $create_eoi_table);
+    
 
     //Insert record into eoi table
     $insert_into_eoi = "
