@@ -5,6 +5,9 @@ require_once('settings.php');
 $conn = mysqli_connect("localhost", "root", "", "project2db");
 
 if ($conn) {
+    #Initialise completed form message variable
+    $message = "";
+
     #Get form data
     $first_name = $_POST['firstname'];
     $last_name = $_POST['lastname'];
@@ -19,6 +22,21 @@ if ($conn) {
     $job_number = $_POST['jobnumber'];
     $experience = $_POST['experience'];
     $other_skills = $_POST['skills'];
+
+    #Sanitize form data
+    $first_name = preg_replace("~[<>/\\\ ]~", "", $first_name);
+    $last_name = preg_replace("~[<>/\\\ ]~", "", $last_name);
+    $dob = preg_replace("~[<>\\\ ]~", "", $dob);
+    $address = preg_replace("~[<>/\\\]~", "", $address);
+    $suburb = preg_replace("~[<>/\\\ ]~", "", $suburb);
+    $postcode = preg_replace("~[<>/\\\ ]~", "", $postcode);
+    $email = filter_var($email, FILTER_SANITIZE_EMAIL);
+    $phone = preg_replace("/[^0-9]/", "", $phone);
+
+    #Check no required fields are empty
+    if ($first_name == "" OR $last_name == "" OR $dob == "" OR $address == "" OR $suburb == "" OR $postcode == "" OR $email == "" OR $phone == "" OR $state == "" OR $job_number == "") {
+        $message = "Some required fields are missing";
+    }
 
     #Assign programming experience variables from checkbox input     
     if (in_array("python", $experience)) {
@@ -43,16 +61,17 @@ if ($conn) {
     }
 
 
+
     #SQL to create empty eoi table if it doesn't exist
     $create_eoi_table = "
     CREATE TABLE IF NOT EXISTS `eoi` (
     `EOInumber` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `Job Reference Number` int(11) NOT NULL,
-    `First Name` varchar(50) NOT NULL,
-    `Last Name` varchar(50) NOT NULL,
-    `Street Address` varchar(100) NOT NULL,
-    `Suburb/town` varchar(100) NOT NULL,
-    `State` varchar(10) NOT NULL,
+    `Job Reference Number` set('Select','100','101') NOT NULL DEFAULT 'Select',
+    `First Name` varchar(20) NOT NULL,
+    `Last Name` varchar(20) NOT NULL,
+    `Street Address` varchar(40) NOT NULL,
+    `Suburb/town` varchar(40) NOT NULL,
+    `State` set('Select','VIC','NSW','QLD','NT','WA','SA','TAS','ACT') NOT NULL DEFAULT 'Select',
     `Postcode` int(11) NOT NULL,
     `Email Address` varchar(100) NOT NULL,
     `Phone number` int(11) NOT NULL,
@@ -67,28 +86,25 @@ if ($conn) {
 
     mysqli_query($conn, $create_eoi_table);
     
+    echo "$suburb";
 
     //Insert record into eoi table
     $insert_into_eoi = "
-    INSERT INTO `eoi` (`EOInumber`, `Job Reference Number`, `First Name`, `Last Name`, `Street Address`, `Suburb/town`, `State`, `Postcode`, `Email Address`, `Phone number`, `Python experience`, `SQL experience`, `C/C++ experience`, `PowerShell experience`, `Other skills`, `Status`) 
-    VALUES (NULL, $job_number, $first_name, $last_name, $address, $suburb, $state, $postcode, $email, $phone, $python, $sql, $c, $powershell, $other_skills, 'New');
+        INSERT INTO eoi (`Job Reference Number`, `First Name`, `Last Name`, `Street Address`, `Suburb/town`, `State`, `Postcode`, `Email Address`, `Phone number`, `Python experience`, `SQL experience`, `C/C++ experience`, `PowerShell experience`, `Other skills`) 
+        VALUES ($job_number, '$first_name', '$last_name', '$address', '$suburb', '$state', $postcode, '$email', $phone, $python, $sql, $c, $powershell, '$other_skills');
     ";
-    //check experience booleans and status
+    
+    if ($message == "") {
+        $result = mysqli_query($conn, $insert_into_eoi);
+        if ($result) {
+            echo "success";
+        } else {
+            echo "failed";
+        }
+    } else {
+        echo "$message";
+    }
 
-    //mysqli_query();
-
-
-
-
-
-
-    //echo '<pre>'; print_r($experience); echo '</pre>';
-    //echo "$otherskills <br>";
-    //print_r($experience);
-    //echo "$experience[0]";
-
-
-    //$result = mysqli_query();
 } else {
     die("Connection falied: " . mysqli_connect_error());
 }
