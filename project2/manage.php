@@ -73,11 +73,13 @@ $result = mysqli_query($conn, $query);
 <body>
 <?php include 'header.inc'; include 'nav.inc'; ?>
 
-<h1>Manage EOI's</h1>
+  <h1>Manage EOI's</h1>
 <?php if ($message) echo "<p>$message</p>"; ?>
 
 <!--List of All EOI's-->
-<h2>List of All EOI's</h2>
+<section>
+  <h2>List of All EOI's</h2>
+</section>
 <?php
 if ($result && mysqli_num_rows($result) > 0) {
     echo "<section>";
@@ -112,7 +114,7 @@ if ($result && mysqli_num_rows($result) > 0) {
 
     echo "</table>";
 } else {
-    echo "<p>No EOI records found.</p>";
+    echo "<section><p>No EOI records found.</p></section>";
 }
 ?>
 
