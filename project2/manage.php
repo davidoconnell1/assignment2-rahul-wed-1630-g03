@@ -77,6 +77,7 @@ $result = mysqli_query($conn, $query);
 <h2>List of All EOI's</h2>
 <?php
 if ($result && mysqli_num_rows($result) > 0) {
+    echo "<section>";
     echo "<table border='1'>";
     echo "<tr>
             <th>EOI Number</th>
@@ -96,6 +97,7 @@ if ($result && mysqli_num_rows($result) > 0) {
             <th>Other Skills</th>
             <th>Status</th>
           </tr>";
+    echo "</section>";
 
     while ($row = mysqli_fetch_assoc($result)) {
         echo "<tr>";
