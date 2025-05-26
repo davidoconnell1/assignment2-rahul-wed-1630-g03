@@ -1,4 +1,6 @@
-<?php #SQL to create empty eoi table if it doesn't exist
+<?php
+
+#SQL to create empty eoi table if it doesn't exist
 $create_eoi_table = "
 CREATE TABLE IF NOT EXISTS `eoi` (
 `EOInumber` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
