@@ -10,6 +10,9 @@ if (!$conn) {
 $whereClause = "";
 $message = "";
 
+#Create empty eoi table if it does not already exist
+include 'create_eoi.inc';
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     #List all EOIs for a particular position (given a job reference number)

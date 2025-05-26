@@ -28,13 +28,13 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `eoi` (
-  `EOInumber` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-  `Job Reference Number` int(11) NOT NULL,
-  `First Name` varchar(50) NOT NULL,
-  `Last Name` varchar(50) NOT NULL,
-  `Street Address` varchar(100) NOT NULL,
-  `Suburb/town` varchar(100) NOT NULL,
-  `State` varchar(10) NOT NULL,
+  `EOInumber` int(11) NOT NULL AUTO_INCREMENT,
+  `Job Reference Number` set('Select','10000','10001') NOT NULL DEFAULT 'Select',
+  `First Name` varchar(20) NOT NULL,
+  `Last Name` varchar(20) NOT NULL,
+  `Street Address` varchar(40) NOT NULL,
+  `Suburb/town` varchar(40) NOT NULL,
+  `State` set('Select','VIC','NSW','QLD','NT','WA','SA','TAS','ACT') NOT NULL DEFAULT 'Select',
   `Postcode` int(11) NOT NULL,
   `Email Address` varchar(100) NOT NULL,
   `Phone number` int(11) NOT NULL,
@@ -43,8 +43,9 @@ CREATE TABLE `eoi` (
   `C/C++ experience` tinyint(1) NOT NULL,
   `PowerShell experience` tinyint(1) NOT NULL,
   `Other skills` text NOT NULL,
-  `Status` set('New','Current','Final') NOT NULL DEFAULT 'New'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `Status` set('New','Current','Final') NOT NULL DEFAULT 'New',
+  PRIMARY KEY (`EOInumber`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
 
 --
 -- Indexes for dumped tables
