@@ -133,7 +133,7 @@ if ($conn) {
     #Create empty eoi table if it does not already exist
     include 'create_eoi.inc'; 
 
-    //Insert record into eoi table
+    #Insert record into eoi table
     $insert_into_eoi = "
         INSERT INTO eoi (`Job Reference Number`, `First Name`, `Last Name`, `Street Address`, `Suburb/town`, `State`, `Postcode`, `Email Address`, `Phone number`, `Python experience`, `SQL experience`, `C/C++ experience`, `PowerShell experience`, `Other skills`) 
         VALUES ('$job_number', '$first_name', '$last_name', '$address', '$suburb', '$state', $postcode, '$email', $phone, $python, $sql, $c, $powershell, '$other_skills');
