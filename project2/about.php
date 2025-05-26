@@ -90,13 +90,13 @@
           <dt>Shared:</dt>
           <dd>Home Page</dd>
           <dt>Jack Hobbs:</dt>
-          <dd>Application Form Page</dd>
-          <dt>David O'Connell</dt>
-          <dd>CSS Styling</dd>
-          <dt>Rijan Bhusal</dt>
-          <dd>Jobs Page</dd>
-          <dt>Lachie Schroen</dt>
-          <dd>About Page</dd>
+          <dd>Application Form Page, EOI & Form Processing</dd>
+          <dt>David O'Connell:</dt>
+          <dd>CSS Styling, Include (.inc) Files, Settings.php</dd>
+          <dt>Rijan Bhusal:</dt>
+          <dd>Jobs Page, Job Descriptions, Enhancements</dd>
+          <dt>Lachie Schroen:</dt>
+          <dd>About Page, Manage.php</dd>
         </dl>
     </section>
 
