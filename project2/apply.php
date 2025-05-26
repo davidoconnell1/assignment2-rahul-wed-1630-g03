@@ -7,15 +7,18 @@
     <link rel="stylesheet" href="styles/style.css">
   </head>
   <body>
+    <!--Header Include File-->
     <?php include 'header.inc'; ?>
 
-    <!-- Menu / Navigation-->
+    <!-- Menu / Navigation Include File-->
     <?php include 'nav.inc'; ?>
     <main>
   <h1>Apply for a Job</h1>
-  <p><label for="ref">Job Reference Number</label>
-  <input type="text" id="ref" name="ref" minlength="5" maxlength="5" pattern="[A-Za-z0-9]{5}" required placeholder="Enter 5-character ref no">
-</p>
+  <section>
+    <p><label for="ref">Job Reference Number</label>
+    <input type="text" id="ref" name="ref" minlength="5" maxlength="5" pattern="[A-Za-z0-9]{5}" required placeholder="Enter 5-character ref no">
+    </p>
+  </section>
     <!--Form-->
     <form method="post" action="process_eoi.php" novalidate="novalidate">
       <!--Personal information box-->
