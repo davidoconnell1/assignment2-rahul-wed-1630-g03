@@ -1,88 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Available Jobs - Intelligenz Analytics</title>
-    <link rel="stylesheet" href="styles/style.css">
-  </head>
-  <body>
-    <!-- Header with Company Logo and Name -->
-    <?php include 'header.inc'; ?>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Available Jobs - Intelligenz Analytics</title>
+  <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+  <!-- Header with Company Logo and Name -->
+  <?php include 'header.inc'; ?>
 
-    <!-- Menu / Navigation -->
-    <?php include 'nav.inc'; ?>
+  <!-- Menu / Navigation -->
+  <?php include 'nav.inc'; ?>
 
-    <!-- Main Content Section -->
-    <main>
-      <section>
-        <h2>Data Analyst</h2>
-        <p><strong>Reference Number:</strong> 10000</p>
-        <p><strong>Position Title:</strong> Data Analyst</p>
-        <p><strong>Brief Description:</strong> Analyze and interpret data to provide actionable insights for the company.</p>
-        <p><strong>Salary Range:</strong> $60,000 - $80,000 annually</p>
-        <p><strong>Reports To:</strong> Senior Data Analyst</p>
+  <!-- Main Content Section -->
+  <main>
+    <?php
+    require_once('settings.php'); // Database config
 
-        <h3>Key Responsibilities</h3>
-        <ul>
-          <li>Collect and analyze data from various sources</li>
-          <li>Prepare reports and presentations on findings</li>
-          <li>Collaborate with teams to solve business problems</li>
-          <li>Ensure data integrity and accuracy</li>
-        </ul>
+    // Connect to the database
+    $conn = mysqli_connect($host, $user, $pwd, $sql_db);
 
-        <h3>Required Qualifications and Skills</h3>
-        <p><strong>Essential:</strong></p>
-        <ul>
-          <li>Bachelor's degree in Data Science, Mathematics, or a related field</li>
-          <li>Experience with Python and SQL</li>
-          <li>3+ years of data analysis experience</li>
-        </ul>
-        <p><strong>Preferable:</strong></p>
-        <ul>
-          <li>Experience with machine learning tools</li>
-          <li>Knowledge of data visualization tools like Tableau or Power BI</li>
-        </ul>
-      </section>
+    // Check connection
+    if (!$conn) {
+      echo "<p>Database connection failed: " . mysqli_connect_error() . "</p>";
+    } else {
+      // Fetch all jobs from database
+      $query = "SELECT * FROM jobs";
+      $result = mysqli_query($conn, $query);
 
-      <section>
-        <h2>Server Technician</h2>
-        <p><strong>Reference Number:</strong> 10001</p>
-        <p><strong>Position Title:</strong> Server Technician</p>
-        <p><strong>Brief Description:</strong> Responsible for maintaining and troubleshooting the company's server infrastructure.</p>
-        <p><strong>Salary Range:</strong> $50,000 - $70,000 annually</p>
-        <p><strong>Reports To:</strong> IT Manager</p>
+      if ($result && mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+          echo "<section>";
+          echo "<h2>" . htmlspecialchars($row['title']) . "</h2>";
+          echo "<p><strong>Description:</strong> " . htmlspecialchars($row['description']) . "</p>";
+          echo "<p><strong>Salary Range:</strong> " . htmlspecialchars($row['salary']) . "</p>";
+          echo "<p><strong>Reports To:</strong> " . htmlspecialchars($row['reports_to']) . "</p>";
 
-        <h3>Key Responsibilities</h3>
-        <ul>
-          <li>Maintain server hardware and software systems</li>
-          <li>Troubleshoot network issues and provide support</li>
-          <li>Perform routine system updates and patches</li>
-          <li>Ensure security and data protection protocols are followed</li>
-        </ul>
+          // Essential Skills
+          echo "<h3>Required Qualifications and Skills</h3>";
+          echo "<p><strong>Essential:</strong></p>";
+          echo "<ul>";
+          $essentialSkills = explode(',', $row['essential']);
+          foreach ($essentialSkills as $skill) {
+            echo "<li>" . htmlspecialchars(trim($skill)) . "</li>";
+          }
+          echo "</ul>";
 
-        <h3>Required Qualifications and Skills</h3>
-        <p><strong>Essential:</strong></p>
-        <ul>
-          <li>Experience with server maintenance and troubleshooting</li>
-          <li>Proficiency with Windows Server, Linux, and virtualization</li>
-          <li>2+ years of experience in a similar role</li>
-        </ul>
-        <p><strong>Preferable:</strong></p>
-        <ul>
-          <li>Experience with cloud computing platforms</li>
-          <li>Knowledge of network configurations and security</li>
-        </ul>
-      </section>
-    </main>
+          // Preferred Skills
+          if (!empty($row['preferred'])) {
+            echo "<p><strong>Preferable:</strong></p>";
+            echo "<ul>";
+            $preferredSkills = explode(',', $row['preferred']);
+            foreach ($preferredSkills as $skill) {
+              echo "<li>" . htmlspecialchars(trim($skill)) . "</li>";
+            }
+            echo "</ul>";
+          }
 
-    <!-- Aside with Job Application Link -->
-    <aside>
-      <h3>Interested in applying?</h3>
-      <p>For more details or to apply for a job, visit our <a href="apply.php">Application Page</a>.</p>
-    </aside>
+          echo "</section>";
+        }
+      } else {
+        echo "<p>No job listings found.</p>";
+      }
 
-    <!-- Footer -->
-    <?php include 'footer.inc'; ?>
-  </body>
+      mysqli_close($conn);
+    }
+    ?>
+  </main>
+
+  <!-- Aside with Job Application Link -->
+  <aside>
+    <h3>Interested in applying?</h3>
+    <p>For more details or to apply for a job, visit our <a href='apply.php'>Application Page</a>.</p>
+  </aside>
+
+  <!-- Footer -->
+  <?php include 'footer.inc'; ?>
+</body>
 </html>
