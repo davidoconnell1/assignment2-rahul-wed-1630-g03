@@ -15,7 +15,7 @@ INSERT INTO jobs (title, description, salary, reports_to, essential, preferred) 
 'Analyze and interpret data to support business decision-making.', 
 '$60,000 - $80,000', 
 'Senior Analyst', 
-'Bachelor\'s in Data Science, Proficiency in Python and SQL, 3+ years experience', 
+'Bachelor\s in Data Science, Proficiency in Python and SQL, 3+ years experience', 
 'Experience with machine learning, Tableau or Power BI'),
 
 ('Server Technician', 
